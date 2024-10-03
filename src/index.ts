@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from "express";
 import morgan from "morgan";
 import userRoutes from './routes/users';
 import dotenv from "dotenv";
+import {authenticateKey} from './middleware/auth.middleware';
 
 // Load environment variables
 dotenv.config();
@@ -32,6 +33,8 @@ app.listen(PORT, () => {
         console.log(`Server is running on default port ${PORT} (No .env file found)`);
     }
 });
+
+app.use('/api/v1/users', authenticateKey, userRoutes)
 
 console.log("PORT from .env:", process.env.PORT);
 

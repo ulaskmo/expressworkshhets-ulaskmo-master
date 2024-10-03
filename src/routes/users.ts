@@ -5,6 +5,8 @@ import {getUsers,
     updateUser,
     deleteUser,
   } from '../controllers/users';
+  import {authenticateKey} from '../middleware/auth.middleware';
+
   
   const router: Router = express.Router();
   
@@ -13,6 +15,7 @@ import {getUsers,
   router.post('/', createUser);
   router.put('/:id', updateUser);
   router.delete('/:id', deleteUser);
+  router.post('/', authenticateKey, createUser);
   
   export default router;
   
